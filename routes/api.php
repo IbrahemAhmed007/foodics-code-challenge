@@ -1,7 +1,6 @@
 <?php
 
-use App\Http\Controllers\MakeOrderController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\API\V1\Orders\MakeOrderController;
 use Illuminate\Support\Facades\Route;
 
 //Route::get('/user', function (Request $request) {
