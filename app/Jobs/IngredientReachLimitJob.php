@@ -3,9 +3,12 @@
 namespace App\Jobs;
 
 use App\Models\Ingredient;
+use App\Models\User;
+use App\Notifications\IngredientReachLimitNotification;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
+use Notification;
 
 class IngredientReachLimitJob implements ShouldQueue, ShouldBeUnique
 {
@@ -32,7 +35,9 @@ class IngredientReachLimitJob implements ShouldQueue, ShouldBeUnique
      */
     public function handle(): void
     {
-        // TODO Send System email
-        \Log::info("{$this->ingredient->name} is reached limit");
+        // Get Admins
+        $admins = User::get();
+        Notification::send($admins, new IngredientReachLimitNotification($this->ingredient));
+
     }
 }
