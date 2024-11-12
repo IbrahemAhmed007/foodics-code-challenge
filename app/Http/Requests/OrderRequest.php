@@ -23,7 +23,7 @@ class OrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'products' => 'array',
+            'products' => ['array','required'],
             'products.*.product_id' => ['required','exists:products,id'],
             'products.*.quantity' => ['required','numeric','min:1'],
         ];
